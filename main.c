@@ -65,8 +65,8 @@ int main() {
         for(int x = 0; x <screenwidth; x++) {
             // calculate ray position and direction
             double cameraX =2*x/ (double)screenwidth-1;
-            double rayDirX = dirX + posX *cameraX;
-            double rayDirY = dirY + posY *cameraX;
+            double rayDirX = dirX + planeX *cameraX;
+            double rayDirY = dirY + planeY *cameraX;
 
             double rayDir = sqrt(rayDirX*rayDirX + rayDirY*rayDirY);    // we can ignore this and use 1 inplace of this cause only ratio matters.
                                                                         // But ill write it anyways for learning purpose.(Remove it later if you wanna optimise it)
