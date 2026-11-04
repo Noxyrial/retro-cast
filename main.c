@@ -141,7 +141,7 @@ int main() {
                 sideDistY = (1-posY + mapY)*deltaDistY;
             }
 
-            // actual DDA stuff
+            // actual DDA(digital differential analysis) stuff
             while(hit == 0) {
                 // jump to next square x or y, which ever closest
                 if(sideDistX < sideDistY) {
@@ -194,11 +194,11 @@ int main() {
         double movespeed = frametime * 5.0;
         double rotspeed = frametime * 3.0;
 
-        if(IsKeyDown(KEY_UP)) {
+        if(IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
             if(worldmap[(int)(posX + dirX * movespeed)][(int)(posY)] == 0) posX += dirX * movespeed;
             if(worldmap[(int)(posX)][(int)(posY + dirY * movespeed)] == 0) posY += dirY * movespeed;
         }
-        if(IsKeyDown(KEY_DOWN))
+        if(IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S))
         {
             if(worldmap[(int)(posX - dirX * movespeed)][(int)(posY)] == 0) posX -= dirX * movespeed;
             if(worldmap[(int)(posX)][(int)(posY - dirY * movespeed)] == 0) posY -= dirY * movespeed;
@@ -220,6 +220,15 @@ int main() {
                 double oldPlaneX = planeX;
                 planeX = planeX * cos(rotspeed) - planeY * sin(rotspeed);
                 planeY = oldPlaneX * sin(rotspeed) + planeY * cos(rotspeed);
+        }
+
+        if (IsKeyDown(KEY_D)) {
+            if (worldmap[(int)(posX + planeX * movespeed)][(int)(posY)] == 0) posX += planeX * movespeed;
+            if (worldmap[(int)(posX)][(int)(posY + planeY * movespeed)] == 0) posY += planeY * movespeed;
+        }
+        if (IsKeyDown(KEY_A)) {
+            if (worldmap[(int)(posX - planeX * movespeed)][(int)(posY)] == 0) posX -= planeX * movespeed;
+            if (worldmap[(int)(posX)][(int)(posY - planeY * movespeed)] == 0) posY -= planeY * movespeed;
         }
     }
 
